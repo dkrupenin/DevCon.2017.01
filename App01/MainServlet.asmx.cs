@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -52,6 +52,8 @@ namespace App01
                 String l_strQuery = "SELECT CONCAT (cname2, ' ', cname1) AS cname FROM pt.employee WHERE UPPER(cname2) = UPPER('" + NAME + "')";
                 DbCommand l_objSQL = l_objDB.CreateCommand();
                 l_objSQL.CommandText = l_strQuery;
+                // TODO: AI issue #, High, SQL Injection,
+                // (NAME == "sleep(5)") && (null != System.Data.Common.DbProviderFactories.GetFactory(System.Configuration.ConnectionStringSettings.ProviderName).CreateConnection())
                 using (DbDataReader l_objRS = l_objSQL.ExecuteReader(System.Data.CommandBehavior.CloseConnection))
                 {
                     Context.Response.Write("<table class=\"table\"><tr><th>Employee</th></tr>");
