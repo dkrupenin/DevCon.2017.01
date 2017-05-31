@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -58,6 +58,8 @@ namespace App01
                     while (l_objRS.Read())
                     {
                         Context.Response.Write("<tr><td>");
+                        // TODO: AI issue #, High, Cross-site Scripting,
+                        // (System.Data.Common.DbCommand.ExecuteReader(32).GetString(0) == "<script>alert(1)</script>") && (NAME == " ") && ((null != System.Data.Common.DbProviderFactories.GetFactory(System.Configuration.ConnectionStringSettings.ProviderName).CreateConnection()) && System.Data.Common.DbCommand.ExecuteReader(32).Read())
                         Context.Response.Write(l_objRS.GetString(0));
                         Context.Response.Write("</td></tr>");
                     }
@@ -75,6 +77,8 @@ namespace App01
         {
             theResponse.Write("<div class=\"bs-callout bs-callout-warning\">");
             theResponse.Write("<h4>Warning</h4>");
+            // TODO: AI issue #, High, Cross-site Scripting,
+            // (theWarning == "<script>alert(1)</script>")
             theResponse.Write(theWarning);
             theResponse.Write("</div>");
         }
@@ -83,6 +87,10 @@ namespace App01
         {
             theResponse.Write("<div class=\"bs-callout bs-callout-INFO\">");
             theResponse.Write("<h4>Info</h4>");
+            // TODO: AI issue #, High, Cross-site Scripting,
+            // (NAME == "<script>alert(1)</script>") && (null != System.Data.Common.DbProviderFactories.GetFactory(System.Configuration.ConnectionStringSettings.ProviderName).CreateConnection())
+            // TODO: AI issue #, High, Cross-site Scripting,
+            // (theInfo == "<script>alert(1)</script>")
             theResponse.Write(theInfo);
             theResponse.Write("</div>");
         }
